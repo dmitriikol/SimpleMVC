@@ -7,7 +7,6 @@ use App\Config;
 
 abstract class Model
 {
-    // TODO
     static $db = null;
 
     protected static function getDB()

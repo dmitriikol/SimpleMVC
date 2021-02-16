@@ -19,15 +19,17 @@ class Router
         $this->env = $env;
     }
 
+    /**
+     * Handle request
+     */
     public function handle(): void
     {
-        if ($this->request->getMethod() === Request::METHOD_POST) {
-            echo "Methods POSTS";
-        }
-
         $requestUri = $this->request->getRequestUri();
         $controller = null;
 
+        /**
+         * Separating request and parameters
+         */
         if (strpos($requestUri, '?')) {
             $requestUri = strstr($requestUri, '?', true);
         }

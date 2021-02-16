@@ -3,7 +3,9 @@
 
 namespace App;
 
-
+/**
+ * Stab config for app
+ */
 class Config
 {
     public const HOST = 'localhost';

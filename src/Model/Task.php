@@ -68,7 +68,7 @@ class Task extends Model
         /** @var \PDO $db */
         $db = static::getDB();
 
-        $stmt = $db->prepare("update tasks set username=?, email=?, text=?, status=? where id=?");
+        $stmt = $db->prepare("update tasks set username=?, email=?, text=?, status=?,special='Edited by admin ' where id=?");
 
         $stmt->bindParam(1, $username, PDO::PARAM_STR);
         $stmt->bindParam(2, $email, PDO::PARAM_STR);

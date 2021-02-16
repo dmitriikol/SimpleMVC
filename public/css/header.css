@@ -1,0 +1,22 @@
+
+.header {
+    height: 64px;
+    width: auto;
+    background: #8ac858;
+}
+
+.head-item {
+    height: 64px;
+}
+
+.head-link {
+    text-align: center;
+    padding-top: 18px;
+    color: #d8ffbc;
+    font-weight: 600;
+}
+
+.head-link:hover {
+    border-bottom: 2px solid;
+    color: white;
+}
