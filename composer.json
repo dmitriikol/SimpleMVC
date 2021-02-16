@@ -10,7 +10,8 @@
     "require": {
         "symfony/http-foundation": "^5.2",
         "twig/twig": "^3.0",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+      "ext-mysqli": "*"
     },
     "autoload": {
         "psr-4": {

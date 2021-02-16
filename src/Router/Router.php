@@ -3,6 +3,7 @@
 namespace App\Router;
 
 use App\Controller\MainController;
+use App\Controller\SecurityController;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
@@ -30,8 +31,8 @@ class Router
             case '/':
                 $controller = new MainController($this->request, $this->env);
                 break;
-            case 'login':
-                echo 'login';
+            case '/login' or '/logout':
+                $controller = new SecurityController($this->request, $this->env);
                 break;
         }
 

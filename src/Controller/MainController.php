@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Config;
 use App\Model\Task;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,17 +22,22 @@ class MainController implements Controller
 
     public function route(): void
     {
-        if ($this->request->getMethod() === Request::METHOD_POST) {
-            $this->mainPost();
-        } else {
+        if ($this->request->getMethod() === Request::METHOD_GET) {
             $this->mainGet();
+        } else {
+            $this->mainPost();
         }
     }
 
     public function mainGet(): void
     {
+        $user = null;
+        if ($_ENV['user'] === Config::ADMIN_LOGIN) {
+            $user = Config::ADMIN_LOGIN;
+        }
+
         $tasks = Task::getAll();
-        $response = new Response($this->env->render('main.html', ['tasks' => $tasks]));
+        $response = new Response($this->env->render('main.html', ['tasks' => $tasks, 'user' => $user]));
         $response->send();
     }
 

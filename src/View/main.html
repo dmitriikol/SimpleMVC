@@ -37,9 +37,14 @@
 <body>
 <header class="header">
     <div class="container">
-        <a style="float: right" href="#" class="head-item head-link">Войти</a>
+        {% if user == 'admin' %}
+            <a style="float: right" href="/logout" class="head-item head-link">Выйти</a>
+        {% else %}
+            <a style="float: right" href="/login" class="head-item head-link">Войти</a>
+        {% endif %}
     </div>
 </header>
+<h1>{{ user }}</h1>
 <div class="main_content container">
     <div class="mt-5">
         <table id="table_id" class="table display">
