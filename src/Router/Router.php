@@ -4,6 +4,7 @@ namespace App\Router;
 
 use App\Controller\MainController;
 use App\Controller\SecurityController;
+use App\Controller\TaskController;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
@@ -27,11 +28,19 @@ class Router
         $requestUri = $this->request->getRequestUri();
         $controller = null;
 
-        switch ($requestUri) {
-            case '/':
+        if (strpos($requestUri, '?')) {
+            $requestUri = strstr($requestUri, '?', true);
+        }
+        $requestUri = explode('/', $requestUri);
+
+        switch ($requestUri[1]) {
+            case '':
                 $controller = new MainController($this->request, $this->env);
                 break;
-            case '/login' or '/logout':
+            case 'task':
+                $controller = new TaskController($this->request, $this->env, $requestUri);
+                break;
+            case 'login' or 'logout':
                 $controller = new SecurityController($this->request, $this->env);
                 break;
         }

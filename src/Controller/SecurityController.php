@@ -24,7 +24,6 @@ class SecurityController implements Controller
     public function route(): void
     {
         $uri = $this->request->getRequestUri();
-        echo $uri;
         switch ($uri) {
             case '/login':
                 if ($this->request->getMethod() === Request::METHOD_GET) {
@@ -42,8 +41,12 @@ class SecurityController implements Controller
 
     public function loginGet(): void
     {
-        $user = getenv('user');
-        $response = new Response($this->env->render('login.html'));
+        $user = null;
+        if ($_ENV['user'] === Config::ADMIN_LOGIN) {
+            $user = Config::ADMIN_LOGIN;
+        }
+
+        $response = new Response($this->env->render('login.html', ['user' => $user]));
         $response->send();
     }
 
