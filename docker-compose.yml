@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  web:
+    container_name: web-nginx
+    image: nginx
+    ports:
+    - "8080:80"
+    volumes:
+    - "./:/code"
+    - "./docker/nginx:/etc/nginx/conf.d"
+    links:
+      - php
+    
+  php:
+    container_name: web-php
+    build:
+      context: ./docker/php
+    volumes:
+    - "./:/code"
+    links:
+      - postgres
+  
+  postgres:
+    container_name: web-postgres
+    image: postgres:latest
+    ports:
+    - "5432:5432"
+    environment:
+      POSTGRES_DB: dmit
+      POSTGRES_USER: dmit
+      POSTGRES_PASSWORD: dmit
