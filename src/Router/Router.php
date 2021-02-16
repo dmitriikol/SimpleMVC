@@ -2,6 +2,7 @@
 
 namespace App\Router;
 
+use App\Controller\MainController;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
@@ -18,7 +19,22 @@ class Router
 
     public function handle(): void
     {
-//        echo $this->env->render('main.html');
-        echo $this->request->getRequestUri();
+        if ($this->request->getMethod() === Request::METHOD_POST) {
+            echo "Methods POSTS";
+        }
+
+        $requestUri = $this->request->getRequestUri();
+        $controller = null;
+
+        switch ($requestUri) {
+            case '/':
+                $controller = new MainController($this->request, $this->env);
+                break;
+            case 'login':
+                echo 'login';
+                break;
+        }
+
+        $controller->route();
     }
 }
